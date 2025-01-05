@@ -1,0 +1,3 @@
+aiohttp-jinja2==1.5
+git+https://github.com/kurimuzonAkuma/pyrogram.git@v2.1.34
+Tgcrypto
