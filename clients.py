@@ -4,29 +4,32 @@ from pyrogram import Client, filters
 from typing import Union
 from time import time
 
+#variable that stores uptime of our bot
 boot = 0
 
-
-#TOKENS
+#importing neccesary values from config
 from config import (
     API_HASH, API_ID, BOT_TOKEN, 
     PORT, LogsChannel, CONTACT_URL
 )
 
-
+# telegram bot client (see pyrogram doc for details)
 Bot = Client(
     name="pleasurebot",
     api_hash=API_HASH,
     api_id=API_ID,
-    plugins={"root": "plugins"},
+    plugins={"root": "plugins"}, #this arguments will tell the bot to import files from plugins folder
     bot_token=BOT_TOKEN
 )
 
+#function to start bot
 async def initiate_bot():
     global boot
     await Bot.start()
+    #this sets global variable to current time in unix seconds
     boot = time()
     try:
+        #this sends a msg in telegram channel that bot started
         self = Bot.me
         await Bot.send_web_page(
             LogsChannel, 
@@ -38,7 +41,7 @@ async def initiate_bot():
     except: pass
 
 
-
+# these are some function which we might need later, you can ignore these 3
 def callback_filter(data):
     return filters.create(
         lambda flt, _, query: flt.data in query.data,
@@ -86,11 +89,13 @@ from aiohttp import web
 from aiohttp_jinja2 import render_template_async, setup
 from jinja2 import FileSystemLoader
 
+#this render the html pages
 async def web_ping(request): 
     return await render_template_async('pages/ping.html', request, {})
 #async def web_cmd(request): 
 #    return await render_template_async('pages/cmdpage.html', request, {})
-    
+
+
 class WebApp:
     def __init__(self):
         self.web_app = web.Application()
