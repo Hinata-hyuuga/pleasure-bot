@@ -10,8 +10,12 @@ boot = 0
 #importing neccesary values from config
 from config import (
     API_HASH, API_ID, BOT_TOKEN, 
-    PORT, LogsChannel, CONTACT_URL
+    PORT, LogsChannel, CONTACT_URL,
+    MONGO_DB_URI
 )
+
+from pymongo import MongoClient
+mongo = MongoClient(MONGO_DB_URI)
 
 # telegram bot client (see pyrogram doc for details)
 Bot = Client(
@@ -127,7 +131,7 @@ class WebApp:
 import logging
 from logging.handlers import RotatingFileHandler
 
-LOG_FILE_NAME = "AnimeRobots.txt"
+LOG_FILE_NAME = "utils/cache/LoggingInfo.txt"
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
