@@ -1,3 +1,6 @@
+# this is main file which we will run to start project
+# it imports client and webapp and runs it in a loop until we stop service
+
 import asyncio
 from clients import WebApp, initiate_bot, LOGGER
 from config import HOST
